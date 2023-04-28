@@ -5,16 +5,17 @@ import EngineConfig from './models/EngineConfig';
 import EngineValidator from './ValidatorEngine';
 import LineReader from './LineReader';
 import { existsSync, readFileSync } from 'fs';
-import { EXTENSION } from '../extension';
+//import { EXTENSION } from '../extension';
 import {
     IApexDoxRc,
     IDocblockConfig,
     IEngineConfig,
+    ISourceEntry,
     Option
     } from '..';
 import { resolve } from 'path';
 import { safeLoad as yamlToJson } from 'js-yaml';
-import { workspace, WorkspaceFolder } from 'vscode';
+//import { workspace, WorkspaceFolder } from 'vscode';
 
 export enum Feature {
     ENGINE,
@@ -24,7 +25,8 @@ export enum Feature {
 class Settings {
 
     // this should be a safe cast. If running this tool, workspace folders should always exist.
-    private static projectRoot = (<WorkspaceFolder[]>workspace.workspaceFolders)[0].uri.fsPath;
+    //private static projectRoot = (<WorkspaceFolder[]>workspace.workspaceFolders)[0].uri.fsPath;
+    private static projectRoot = "D:\\ApexDox";
 
     /**
      * Note that casting user provided configs as ApexDox configs
@@ -89,14 +91,33 @@ class Settings {
                 };
             } else {
                 // if no .apexdoxrc file found, get config from settings.json
-                config = <IEngineConfig>workspace.getConfiguration(EXTENSION).get('engine');
+                //config = <IEngineConfig>workspace.getConfiguration(EXTENSION).get('engine');
+                let srcEntry: ISourceEntry[] = [{
+                    path: "D:\\ApexDox\\apexExampleClasses"
+                }]
+                config = {
+                    source: srcEntry,
+                    targetDirectory: "D:\\ApexDox\\Documentation",
+                    includes: [],
+                    excludes: [],
+                    homePagePath: "",
+                    scope: [ 'global', 'public', 'protected', 'private', 'testMethod', 'webService' ],
+                    title: "Apex Documentation",
+                    subtitle: "Powered by ApexDox",
+                    showTOCSnippets: true,
+                    sortOrder: "alpha",
+                    cleanDir: false,
+                    assets: [],
+                    pages: [],
+                    port: 8080
+                }
             }
             // pass result of either to directory defaulter and validate
             return <T>new EngineValidator(this.setEngineDirectoryDefaults(config)).validate();
         }
 
         // getting docblock config
-        else if (type === Feature.DOC_BLOCK) {
+        /* else if (type === Feature.DOC_BLOCK) {
             let config: IDocblockConfig;
             if (rcConfig) {
                 config = {
@@ -108,7 +129,7 @@ class Settings {
             }
 
             return <T>new DocblockValidator(config).validate();
-        }
+        } */
 
         throw new ApexDoxError('Feature type not supported!');
     }

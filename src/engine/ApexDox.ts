@@ -6,7 +6,7 @@ import { basename } from 'path';
 import { IEngineConfig, Option } from '..';
 import { last } from '../common/ArrayUtils';
 import { performance } from 'perf_hooks';
-import { window } from 'vscode';
+//import { window } from 'vscode';
 
 class ApexDox {
     // constants
@@ -29,7 +29,7 @@ class ApexDox {
     private static readonly COMMENT_OPEN: string = '/**';
 
     // static members
-    public static extensionRoot: string;
+    public static extensionRoot: string = "D:\\ApexDox\\apexdox-vs-code";
     public static currentFile: string;
     public static config: IEngineConfig;
 
@@ -77,7 +77,8 @@ class ApexDox {
             // we are done!
             const endElapsed = performance.now();
             const elapsed = ((endElapsed - beginElapsed) / 1000).toFixed(2);
-            window.showInformationMessage(`ApexDox VS Code complete! ${numProcessed} Apex files documented in ${elapsed}s.`);
+            //window.showInformationMessage(`ApexDox VS Code complete! ${numProcessed} Apex files documented in ${elapsed}s.`);\
+            console.log(`ApexDox VS Code complete! ${numProcessed} Apex files documented in ${elapsed}s.`);
         } catch (err) {
             throw err;
         }

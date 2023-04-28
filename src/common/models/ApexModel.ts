@@ -3,7 +3,7 @@ import ApexDox from '../../engine/ApexDox';
 import Utils from '../Utils';
 import { existsSync } from 'fs';
 import { resolve } from 'path';
-import { window, workspace, WorkspaceFolder } from 'vscode';
+//import { window, workspace, WorkspaceFolder } from 'vscode';
 import { Option } from '../..';
 import { OrderTag } from './OrderTag';
 
@@ -220,7 +220,8 @@ abstract class ApexModel {
 
     private resolveContentPath(contentPath: string): Option<string, null> {
         // If running this tool, workspace folders should always exist, okay to cast.
-        const projectRoot = (<WorkspaceFolder[]>workspace.workspaceFolders)[0].uri.fsPath;
+        //const projectRoot = (<WorkspaceFolder[]>workspace.workspaceFolders)[0].uri.fsPath;
+        const projectRoot = "D:\\ApexDox";
         const path = resolve(projectRoot, contentPath.trim());
 
         if (contentPath.trim().endsWith('.html') && existsSync(path)) {
@@ -231,7 +232,7 @@ abstract class ApexModel {
             `@group-content path '${contentPath.trim()}' in file '${ApexDox.currentFile}' is invalid! ` +
             `You may want to update this tag's value to a valid HTML file path.`;
 
-        window.showWarningMessage(warningMessage);
+        //window.showWarningMessage(warningMessage);
         return null;
     }
 

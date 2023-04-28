@@ -1,6 +1,6 @@
 import LineReader from './common/LineReader';
-import { StubType } from './docblock/StubBase';
-import { TextLine } from 'vscode';
+//import { StubType } from './docblock/StubBase';
+//import { TextLine } from 'vscode';
 
 declare namespace ApexDox {
 
@@ -73,13 +73,13 @@ declare namespace ApexDox {
      *  Docblock Types
      *  ============================================================
      */
-    interface IMethodMatch {
+     interface IMethodMatch {
         foundMatch: boolean;
         selector: string;
         methodName: string;
     }
 
-    interface IStubLine {
+    /*interface IStubLine {
         insertNewLine: boolean;
         line: TextLine;
         lineIndex: number;
@@ -92,13 +92,13 @@ declare namespace ApexDox {
         closeCurlies: number;
         openParens: number;
         closeParens: number;
-    }
+    }*/
 
     interface IApexDoxTag {
         label: string;
         documentation: string;
         snippet: string;
-    }
+    } 
 
     /** ============================================================
      *  Miscellaneous Types

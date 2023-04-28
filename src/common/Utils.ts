@@ -3,7 +3,7 @@ import { ClassModel } from './models/ClassModel';
 import { last } from './ArrayUtils';
 import { Option } from '..';
 import { resolve } from 'path';
-import { window, workspace, WorkspaceFolder } from 'vscode';
+//import { window, workspace, WorkspaceFolder } from 'vscode';
 
 class Utils {
     private static readonly PRIVATE: string = 'private';
@@ -175,7 +175,16 @@ class Utils {
     public static resolveWorkspaceFolder(path: string): string {
         // should be safe to cast this as not-undefined
         // If running this tool, workspace folders should always exist.
-        const folders = <WorkspaceFolder[]>(workspace.workspaceFolders);
+        //const folders = <WorkspaceFolder[]>(workspace.workspaceFolders);
+        const folders = [{
+            index: 1,
+            name: "ApexDox",
+            uri: {
+                authority: "",
+                fragment: "",
+                fsPath: "D:\\ApexDox"
+            }
+        }];
 
         const rootFolderRe = /\$\{workspaceFolder\}(.*)?/;
         const multiFolderRe = /\$\{workspaceFolder:(.*)\}(.*)/;
@@ -191,7 +200,7 @@ class Utils {
                 }
             }
 
-            window.showWarningMessage(`Workspace variable in path '${path}' could not be resolved.`);
+            //window.showWarningMessage(`Workspace variable in path '${path}' could not be resolved.`);
         }
 
         return path;

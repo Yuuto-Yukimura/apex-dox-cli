@@ -11,7 +11,7 @@ import MenuGenerator from './generators/MenuGenerator';
 import path from 'path';
 import pretty from 'pretty';
 import rimraf from 'rimraf';
-import { window } from 'vscode';
+//import { window } from 'vscode';
 import { ISourceEntry, Option, ILunrDocument, IApexDoxMenus } from '..';
 import Utils from '../common/Utils';
 import { EOL } from 'os';
@@ -93,7 +93,7 @@ class FileManager {
             throw new ApexDoxError(ApexDoxError.NO_FILES_FOUND(sourceDirs));
         } else if (noneFound.length) {
             // no .cls files found in one or more (but not all) of given source dirs, show warning
-            window.showWarningMessage(`No matching .cls files found in ${noneFound.join(',')}`);
+            //window.showWarningMessage(`No matching .cls files found in ${noneFound.join(',')}`);
         }
 
         return filesToCopy;
@@ -221,7 +221,8 @@ class FileManager {
             if (fs.existsSync(file)) {
                 fs.copyFileSync(file, path.resolve(this.path, 'assets', path.basename(file)));
             } else {
-                window.showWarningMessage(ApexDoxError.ASSET_NOT_FOUND(file));
+                //window.showWarningMessage(ApexDoxError.ASSET_NOT_FOUND(file));
+                console.log(ApexDoxError.ASSET_NOT_FOUND(file));
             }
         });
     }

@@ -4,7 +4,7 @@ import open from 'open';
 import Utils from '../common/Utils';
 import { existsSync } from 'fs';
 import { resolve } from 'path';
-import { window } from 'vscode';
+//import { window } from 'vscode';
 
 let server: Server;
 
@@ -27,9 +27,10 @@ export default async function createDocServer(targetDirectory: string, docsTitle
 
         console.info(listening(port));
         await open(`http://localhost:${port}/index.html`);
-        window.showInformationMessage(success(docsTitle));
+        //window.showInformationMessage(success(docsTitle));
+        console.log(`success ${docsTitle}`);
     } else {
-        window.showErrorMessage(error(resolvedTarget));
+        //window.showErrorMessage(error(resolvedTarget));
     }
 }
 
